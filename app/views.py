@@ -44,9 +44,11 @@ def add_file():
 
 @app.route('/filelisting')
 def filelisting():
+    if not session.get('logged_in'):
+        abort(401)
+        
     rootdir = os.getcwd()
     flist=[]
-    print rootdir
     for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
         for file in files:
              flist.append(file)
