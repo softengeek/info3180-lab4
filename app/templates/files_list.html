@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block css %}
+    <style>
+        .fimage {
+            max-width: 500;
+            max-height: 500;
+            padding-bottom: 2%;
+        }
+    </style>
+{% endblock %}
+
+{% block main %}
+<h1>Files Uploaded</h1>
+<hr>
+
+{% for k in flist %}
+{%if k.lower().split('.')[-1] == 'jpg' or k.lower().split('.')[-1] == 'jpeg'%}
+    <ul>
+        <li>
+            {{ k }}
+            <div class="fimage"> 
+                <img src={{ url_for('static',filename= "uploads/"+ k )}}> 
+            </div>
+        </li>
+    </ul>
+    {% else %}
+    <ul>
+        <li>{{ k }}</li>
+    </ul>
+{% endif %}
+{% endfor %}
+{% endblock %}
