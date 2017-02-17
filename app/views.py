@@ -42,6 +42,17 @@ def add_file():
 
     return render_template('add_file.html')
 
+@app.route('/filelisting')
+def filelisting():
+    rootdir = os.getcwd()
+    flist=[]
+    print rootdir
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
+        for file in files:
+             flist.append(file)
+    """Render the website's about page."""
+    return render_template('files_list.html', flist=flist)
+
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     error = None
